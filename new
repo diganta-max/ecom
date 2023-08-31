@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- TITLE + CHARSET + VIEWPORT -->
+    <title>Food Ordering Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+
+    <!-- ICONS -->
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <link rel="apple-touch-icon" href="assets/ico-512.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Ordering Demo">
+    <meta name="msapplication-TileImage" content="assets/ico-512.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+
+    <!-- MANIFEST + WORKER -->
+    <link rel="manifest" href="front.json">
+    <script>if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }</script>
+
+    <!-- CSS + JS -->
+    <!-- https://cdnjs.com/libraries/peerjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.4.7/peerjs.min.js"></script>
+    <script src="assets/1-products.js"></script>
+    <script src="assets/2-cart.js"></script>
+    <link rel="stylesheet" href="assets/2-cart.css">
+  </head>
+  <body>
+    <!-- (A) CART -->
+    <div id="cart-wrap">
+      <!-- (A1) PRODUCTS LIST -->
+      <div id="cart-products"></div>
+
+      <!-- (A2) CURRENT CART ITEMS -->
+      <div id="cart-items"></div>
+    </div>
+
+    <!-- (B) TEMPLATES -->
+    <!-- (B1) PRODUCT CELL -->
+    <template id="template-product">
+    <div class="p-item">
+      <img class="p-img">
+      <div class="p-info">
+        <div class="p-txt">
+          <div class="p-name"></div>
+          <div class="p-price"></div>
+        </div>
+        <button class="cart p-add">+</button>
+      </div>
+    </div>
+    </template>
+
+    <!-- (B2) CART ITEMS -->
+    <template id="template-cart">
+    <div class="c-item">
+      <input class="c-qty" type="number" min="0">
+      <div class="c-name"></div>
+      <button class="c-del cart">X</button>
+    </div>
+    </template>
+    <template id="template-cart-checkout">
+    <div class="c-go">
+      <button class="c-empty cart" onclick="cart.nuke()">Empty</button>
+      <button class="c-checkout cart" onclick="cart.checkout()">Checkout</button>
+    </div>
+    </template>
+  </body>
+</html>
